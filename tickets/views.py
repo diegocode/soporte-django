@@ -1,5 +1,7 @@
 from django.http import HttpResponse
+from django.shortcuts import render
 import datetime
+from .models import Ticket
 
 # vista para probar
 # copiada de la documentación de django:
@@ -9,3 +11,6 @@ def current_datetime(request):
     html = "<html><body>It is now %s.</body></html>" % now
     return HttpResponse(html)
 
+def listar_tickets(request):
+    datos = Ticket.objects.all()
+    return render(request, 'tickets/lista_tickets.html', {'lista_tickets': datos})
